@@ -76,7 +76,7 @@ class KaryawanController extends Controller
             return response()->json(['message' => 'Karyawan tidak ditemukan'], 404);
         }
 
-        $karyawan->delete();
+        $karyawan->forceDelete();
 
         return response()->json([]);
     }
