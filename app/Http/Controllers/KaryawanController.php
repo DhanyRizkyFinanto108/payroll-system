@@ -78,7 +78,7 @@ class KaryawanController extends Controller
 
         $karyawan->delete();
 
-        return response()->json(['message' => 'Karyawan berhasil dihapus']);
+        return response()->json([]);
     }
 
     // GET: Ambil absensi berdasarkan ID karyawan
