@@ -14,10 +14,22 @@ class Karyawan extends Model
 
     protected $fillable = [
         'id_karyawan',
+        'nama',
         'jabatan',
-        'gaji_pokok',
-        'nama'
+        'gaji_pokok'
     ];
+
+    // Definisikan event deleting untuk memastikan relasi juga dihapus
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::deleting(function($karyawan) {
+            if (method_exists($karyawan, 'absensis')) {
+                $karyawan->absensis()->delete();
+            }
+        });
+    }
 
     public function absensis()
     {

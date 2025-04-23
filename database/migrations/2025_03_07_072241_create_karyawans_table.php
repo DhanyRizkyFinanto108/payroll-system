@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('jabatan');
             $table->integer('gaji_pokok');
             $table->string('nama');
+            $table->timestamps();
         });
     }
 

@@ -11,16 +11,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('karyawan')->group(function () {
+Route::group([], function () {
     Route::get('/', [KaryawanController::class, 'index']);
-    Route::post('/', [KaryawanController::class, 'store']); 
-    Route::get('/{id}', [KaryawanController::class, 'show']);
-    Route::put('/{id}', [KaryawanController::class, 'update']);
-    Route::patch('/{id}', [KaryawanController::class, 'updatePartial']);
-    Route::delete('/{id}', [KaryawanController::class, 'destroy']);
+    Route::post('/', [KaryawanController::class, 'store']);
+    Route::get('/{id_karyawan}', [KaryawanController::class, 'show']);
+    Route::put('/{id_karyawan}', [KaryawanController::class, 'update']);
+    Route::delete('/{id_karyawan}', [KaryawanController::class, 'destroy']);
 });
 
-Route::prefix('riwayatpembayaran')->group(function () {
+Route::group([], function () {
     Route::get('/', [RiwayatPembayaranController::class, 'index']);
     Route::post('/', [RiwayatPembayaranController::class, 'store']);
     Route::get('/{id}', [RiwayatPembayaranController::class, 'show']);
@@ -29,7 +28,7 @@ Route::prefix('riwayatpembayaran')->group(function () {
     Route::get('/karyawan/{id}', [RiwayatPembayaranController::class, 'getByKaryawan']);
 });
 
-Route::prefix('gajibulanan')->group(function () {
+Route::group([], function () {
     Route::get('/', [GajiBulananController::class, 'index']);
     Route::post('/', [GajiBulananController::class, 'store']);
     Route::get('/{id}', [GajiBulananController::class, 'show']);
@@ -41,7 +40,7 @@ Route::prefix('gajibulanan')->group(function () {
     Route::get('/pembayaran/{id_pembayaran}', [GajiBulananController::class, 'getByPembayaran']);
 });
 
-Route::prefix('absensi')->group(function () {
+Route::group([], function () {
     Route::get('/', [AbsensiController::class, 'index']);
     Route::post('/', [AbsensiController::class, 'store']);
     Route::get('/{id}', [AbsensiController::class, 'show']);
