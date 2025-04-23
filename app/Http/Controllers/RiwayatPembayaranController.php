@@ -15,12 +15,14 @@ class RiwayatPembayaranController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/riwayat-pembayaran",
-     *     summary="Get all riwayat pembayaran",
+     *     path="/riwayat-pembayaran",
+     *     summary="Ambil semua data riwayat pembayaran",
+     *     description="Menampilkan seluruh daftar pembayaran",
+     *     operationId="getAllPembayaran",
      *     tags={"Riwayat Pembayaran"},
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil menampilkan data",
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/RiwayatPembayaran")
@@ -28,12 +30,14 @@ class RiwayatPembayaranController extends Controller
      *     ),
      *     @OA\Response(
      *         response=500,
-     *         description="Server error"
+     *         description="Server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Error message")
+     *         )
      *     )
      * )
      */
-    public function index()
-    {
+    public function index() {
         try {
             $pembayaran = RiwayatPembayaran::all();
             return response()->json($pembayaran);
@@ -44,36 +48,43 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/riwayat-pembayaran",
-     *     summary="Create new riwayat pembayaran",
+     *     path="/riwayat-pembayaran",
+     *     summary="Tambah data pembayaran baru",
+     *     description="Membuat record pembayaran baru",
+     *     operationId="createPembayaran",
      *     tags={"Riwayat Pembayaran"},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="id_pembayaran", type="string", example="PMB-001"),
+     *             required={"id_pembayaran", "waktu", "metode"},
+     *             @OA\Property(property="id_pembayaran", type="string", example="PAY-001"),
      *             @OA\Property(property="waktu", type="string", format="date-time", example="2025-04-23 10:00:00"),
-     *             @OA\Property(property="metode", type="string", example="Transfer Bank")
+     *             @OA\Property(property="metode", type="string", enum={"Transfer Bank", "Tunai", "E-wallet"}, example="Transfer Bank")
      *         )
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Created successfully",
+     *         description="Berhasil membuat data baru",
      *         @OA\JsonContent(ref="#/components/schemas/RiwayatPembayaran")
      *     ),
      *     @OA\Response(
      *         response=422,
-     *         description="Validation error"
+     *         description="Validasi gagal",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="errors", type="object", example={"id_pembayaran": {"The id pembayaran field is required."}})
+     *         )
      *     ),
      *     @OA\Response(
      *         response=500,
-     *         description="Server error"
+     *         description="Server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Error message")
+     *         )
      *     )
      * )
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         try {
-            // Validasi request
             $validator = Validator::make($request->all(), [
                 'id_pembayaran' => 'required|string|unique:riwayat_pembayaran,id_pembayaran',
                 'waktu' => 'required|date',
@@ -92,33 +103,40 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/riwayat-pembayaran/{id}",
-     *     summary="Get riwayat pembayaran by ID",
+     *     path="/riwayat-pembayaran/{id}",
+     *     summary="Tampilkan detail pembayaran",
+     *     description="Menampilkan data pembayaran berdasarkan ID",
+     *     operationId="showPembayaran",
      *     tags={"Riwayat Pembayaran"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of riwayat pembayaran",
-     *         @OA\Schema(type="string")
+     *         description="ID dari riwayat pembayaran",
+     *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil menampilkan detail",
      *         @OA\JsonContent(ref="#/components/schemas/RiwayatPembayaran")
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Data tidak ditemukan",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Record not found")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=500,
-     *         description="Server error"
+     *         description="Server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Error message")
+     *         )
      *     )
      * )
      */
-    public function show($id)
-    {
+    public function show($id) {
         try {
             $pembayaran = RiwayatPembayaran::findOrFail($id);
             return response()->json($pembayaran);
@@ -129,52 +147,60 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/riwayat-pembayaran/{id}",
-     *     summary="Update riwayat pembayaran",
+     *     path="/riwayat-pembayaran/{id}",
+     *     summary="Update data pembayaran",
+     *     description="Memperbarui data pembayaran berdasarkan ID",
+     *     operationId="updatePembayaran",
      *     tags={"Riwayat Pembayaran"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of riwayat pembayaran",
-     *         @OA\Schema(type="string")
+     *         description="ID dari riwayat pembayaran",
+     *         @OA\Schema(type="integer")
      *     ),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="waktu", type="string", format="date-time", example="2025-04-23 14:30:00"),
-     *             @OA\Property(property="metode", type="string", example="Tunai")
+     *             @OA\Property(property="waktu", type="string", format="date-time", example="2025-04-23 10:00:00"),
+     *             @OA\Property(property="metode", type="string", enum={"Transfer Bank", "Tunai", "E-wallet", "QRIS"}, example="QRIS")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Updated successfully",
+     *         description="Berhasil memperbarui data",
      *         @OA\JsonContent(ref="#/components/schemas/RiwayatPembayaran")
      *     ),
      *     @OA\Response(
      *         response=422,
-     *         description="Validation error"
+     *         description="Validasi gagal",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="errors", type="object", example={"metode": {"The metode field must be one of: Transfer Bank, Tunai, E-wallet, QRIS."}})
+     *         )
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Data tidak ditemukan",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Record not found")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=500,
-     *         description="Server error"
+     *         description="Server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Error message")
+     *         )
      *     )
      * )
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         try {
             $pembayaran = RiwayatPembayaran::findOrFail($id);
-            // Validasi request untuk update
             $validator = Validator::make($request->all(), [
                 'waktu' => 'date',
                 'metode' => 'string|in:Transfer Bank,Tunai,E-wallet,QRIS',
             ]);
-            
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()], 422);
             }
@@ -187,36 +213,35 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/riwayat-pembayaran/{id}",
-     *     summary="Delete riwayat pembayaran",
+     *     path="/riwayat-pembayaran/{id}",
+     *     summary="Hapus data pembayaran",
+     *     description="Menghapus data pembayaran berdasarkan ID",
+     *     operationId="deletePembayaran",
      *     tags={"Riwayat Pembayaran"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of riwayat pembayaran",
-     *         @OA\Schema(type="string")
+     *         description="ID dari riwayat pembayaran",
+     *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Deleted successfully",
+     *         description="Berhasil menghapus data",
      *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="success", type="boolean")
+     *             @OA\Property(property="success", type="boolean", example=true)
      *         )
      *     ),
      *     @OA\Response(
-     *         response=404,
-     *         description="Not found"
-     *     ),
-     *     @OA\Response(
      *         response=500,
-     *         description="Server error"
+     *         description="Server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Error message")
+     *         )
      *     )
      * )
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         try {
             $deleted = RiwayatPembayaran::destroy($id);
             return response()->json(['success' => $deleted > 0]);
@@ -224,22 +249,24 @@ class RiwayatPembayaranController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    
+
     /**
      * @OA\Get(
-     *     path="/api/riwayat-pembayaran/{id}/gaji-bulanan",
-     *     summary="Get gaji bulanan by pembayaran ID",
+     *     path="/riwayat-pembayaran/{id}/gaji",
+     *     summary="Ambil gaji bulanan berdasarkan ID pembayaran",
+     *     description="Menampilkan data gaji bulanan yang terkait dengan riwayat pembayaran",
+     *     operationId="getGajiByPembayaran",
      *     tags={"Riwayat Pembayaran"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of riwayat pembayaran",
-     *         @OA\Schema(type="string")
+     *         description="ID dari riwayat pembayaran",
+     *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil menampilkan data gaji",
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/GajiBulanan")
@@ -247,19 +274,23 @@ class RiwayatPembayaranController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Data tidak ditemukan",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Record not found")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=500,
-     *         description="Server error"
+     *         description="Server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Error message")
+     *         )
      *     )
      * )
      */
-    public function getGajiBulanan($id)
-    {
+    public function getGajiBulanan($id) {
         try {
             $pembayaran = RiwayatPembayaran::findOrFail($id);
-            // Ambil data Gaji_bulanan yang terkait dengan RiwayatPembayaran ini
             $gaji = GajiBulanan::where('id_pembayaran', $id)->get();
             return response()->json($gaji);
         } catch (\Exception $e) {
@@ -267,3 +298,30 @@ class RiwayatPembayaranController extends Controller
         }
     }
 }
+
+/**
+ * @OA\Schema(
+ *     schema="RiwayatPembayaran",
+ *     title="Riwayat Pembayaran",
+ *     description="Model Riwayat Pembayaran",
+ *     @OA\Property(property="id", type="integer", format="int64", description="ID record", example=1),
+ *     @OA\Property(property="id_pembayaran", type="string", description="ID pembayaran unik", example="PAY-001"),
+ *     @OA\Property(property="waktu", type="string", format="date-time", description="Waktu pembayaran", example="2025-04-23 10:00:00"),
+ *     @OA\Property(property="metode", type="string", description="Metode pembayaran", example="Transfer Bank"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", description="Waktu pembuatan record"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", description="Waktu update terakhir")
+ * )
+ * 
+ * @OA\Schema(
+ *     schema="GajiBulanan",
+ *     title="Gaji Bulanan",
+ *     description="Model Gaji Bulanan",
+ *     @OA\Property(property="id", type="integer", format="int64", description="ID record", example=1),
+ *     @OA\Property(property="id_pembayaran", type="string", description="ID pembayaran yang terkait", example="PAY-001"),
+ *     @OA\Property(property="jumlah", type="number", format="float", description="Jumlah gaji", example=5000000),
+ *     @OA\Property(property="bulan", type="string", description="Bulan gaji", example="April 2025"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", description="Waktu pembuatan record"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", description="Waktu update terakhir")
+ * )
+ */
+?>

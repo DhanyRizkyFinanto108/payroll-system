@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 /**
  * @OA\Tag(
  *     name="Absensi",
- *     description="API endpoints for managing absensi karyawan"
+ *     description="API endpoints untuk mengelola absensi karyawan"
  * )
  */
 class AbsensiController extends Controller
@@ -14,11 +14,11 @@ class AbsensiController extends Controller
     /**
      * @OA\Get(
      *     path="/api/absensi",
-     *     summary="Get all absensi",
+     *     summary="Mendapatkan semua data absensi",
      *     tags={"Absensi"},
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="status", type="integer", example=200),
@@ -45,7 +45,7 @@ class AbsensiController extends Controller
     /**
      * @OA\Post(
      *     path="/api/absensi",
-     *     summary="Create new absensi",
+     *     summary="Membuat data absensi baru",
      *     tags={"Absensi"},
      *     @OA\RequestBody(
      *         required=true,
@@ -58,7 +58,7 @@ class AbsensiController extends Controller
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Created successfully",
+     *         description="Berhasil dibuat",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="status", type="integer", example=201),
@@ -68,7 +68,7 @@ class AbsensiController extends Controller
      *     ),
      *     @OA\Response(
      *         response=422,
-     *         description="Validation error"
+     *         description="Validasi gagal"
      *     )
      * )
      */
@@ -92,18 +92,18 @@ class AbsensiController extends Controller
     /**
      * @OA\Get(
      *     path="/api/absensi/{id_absensi}",
-     *     summary="Get absensi by ID",
+     *     summary="Mendapatkan data absensi berdasarkan ID",
      *     tags={"Absensi"},
      *     @OA\Parameter(
      *         name="id_absensi",
      *         in="path",
      *         required=true,
-     *         description="ID of absensi",
+     *         description="ID absensi",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="status", type="integer", example=200),
@@ -113,7 +113,7 @@ class AbsensiController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found",
+     *         description="Tidak ditemukan",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="status", type="integer", example=404),
@@ -143,13 +143,13 @@ class AbsensiController extends Controller
     /**
      * @OA\Put(
      *     path="/api/absensi/{id_absensi}",
-     *     summary="Update absensi",
+     *     summary="Memperbarui data absensi",
      *     tags={"Absensi"},
      *     @OA\Parameter(
      *         name="id_absensi",
      *         in="path",
      *         required=true,
-     *         description="ID of absensi",
+     *         description="ID absensi",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\RequestBody(
@@ -162,7 +162,7 @@ class AbsensiController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Updated successfully",
+     *         description="Berhasil diperbarui",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="status", type="integer", example=200),
@@ -172,7 +172,7 @@ class AbsensiController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found",
+     *         description="Tidak ditemukan",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="status", type="integer", example=404),
@@ -182,7 +182,7 @@ class AbsensiController extends Controller
      *     ),
      *     @OA\Response(
      *         response=422,
-     *         description="Validation error"
+     *         description="Validasi gagal"
      *     )
      * )
      */
@@ -213,18 +213,18 @@ class AbsensiController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/absensi/{id_absensi}",
-     *     summary="Delete absensi",
+     *     summary="Menghapus data absensi",
      *     tags={"Absensi"},
      *     @OA\Parameter(
      *         name="id_absensi",
      *         in="path",
      *         required=true,
-     *         description="ID of absensi",
+     *         description="ID absensi",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Deleted successfully",
+     *         description="Berhasil dihapus",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="status", type="integer", example=200),
@@ -234,7 +234,7 @@ class AbsensiController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found",
+     *         description="Tidak ditemukan",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="status", type="integer", example=404),

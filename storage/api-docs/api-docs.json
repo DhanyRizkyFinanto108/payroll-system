@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Documentation",
-        "description": "Documentation for the Bookstore API",
+        "title": "Sistem Manajemen Karyawan API",
+        "description": "Dokumentasi API untuk sistem manajemen karyawan, absensi, dan penggajian",
         "contact": {
             "email": "admin@example.com"
         },
@@ -19,33 +19,1929 @@
         }
     ],
     "paths": {
-        "/category": {
+        "/api/absensi": {
             "get": {
                 "tags": [
-                    "Category"
+                    "Absensi"
                 ],
-                "summary": "List of Categories",
-                "description": "Retrieve a list of book categories",
-                "operationId": "listCategory",
+                "summary": "Mendapatkan semua data absensi",
+                "operationId": "5b19625a5f0d82fecfee3104447ac8b8",
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Berhasil",
                         "content": {
                             "application/json": {
-                                "schema": {},
-                                "example": {
-                                    "success": true,
-                                    "message": "Successfully retrieved categories",
-                                    "data": [
-                                        {
-                                            "id": 1,
-                                            "name": "Fiction"
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
                                         },
-                                        {
-                                            "id": 2,
-                                            "name": "Non-Fiction"
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Absensi retrieved successfully."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Absensi"
+                                            }
                                         }
-                                    ]
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "Membuat data absensi baru",
+                "operationId": "2e14460020ca3a62a1fb85def420520e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_absensi": {
+                                        "type": "string",
+                                        "example": "ABS-001"
+                                    },
+                                    "id_karyawan": {
+                                        "type": "string",
+                                        "example": "KRY-001"
+                                    },
+                                    "waktu": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-04-23 08:00:00"
+                                    },
+                                    "keterangan": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil dibuat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Absensi created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Absensi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            }
+        },
+        "/api/absensi/{id_absensi}": {
+            "get": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "Mendapatkan data absensi berdasarkan ID",
+                "operationId": "19960c1df78be113f861bb8e78fd77cb",
+                "parameters": [
+                    {
+                        "name": "id_absensi",
+                        "in": "path",
+                        "description": "ID absensi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Absensi retrieved successfully."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Absensi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Absensi not found."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "Memperbarui data absensi",
+                "operationId": "1a6227666f2c026fdd383e16ae946879",
+                "parameters": [
+                    {
+                        "name": "id_absensi",
+                        "in": "path",
+                        "description": "ID absensi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_karyawan": {
+                                        "type": "string",
+                                        "example": "KRY-002"
+                                    },
+                                    "waktu": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-04-23 09:30:00"
+                                    },
+                                    "keterangan": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Absensi updated successfully."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Absensi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Absensi not found."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Absensi"
+                ],
+                "summary": "Menghapus data absensi",
+                "operationId": "e9a3aadbb774f9a1c6b8a43fa8d7e21e",
+                "parameters": [
+                    {
+                        "name": "id_absensi",
+                        "in": "path",
+                        "description": "ID absensi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil dihapus",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Absensi deleted successfully."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Absensi not found."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/gaji-bulanan": {
+            "get": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Mendapatkan semua data gaji bulanan",
+                "operationId": "726c16d6fa4b33a98ad99603f1a391f8",
+                "responses": {
+                    "200": {
+                        "description": "Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GajiBulanan"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Membuat data gaji bulanan baru",
+                "operationId": "15161a519634c119ab2e46456d0fe5d7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_absensi": {
+                                        "type": "string",
+                                        "example": "ABS-001"
+                                    },
+                                    "id_pembayaran": {
+                                        "type": "string",
+                                        "example": "PMB-001"
+                                    },
+                                    "nominal": {
+                                        "type": "integer",
+                                        "example": 5000000
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-23"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil dibuat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GajiBulanan"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/gaji-bulanan/{id}": {
+            "get": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Mendapatkan data gaji bulanan berdasarkan ID",
+                "operationId": "d13652209506f9c2c04fa1dffe9926e1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID gaji bulanan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GajiBulanan"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Memperbarui data gaji bulanan",
+                "operationId": "e1b7c19a3f1f1848d359c88f5674462a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID gaji bulanan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_absensi": {
+                                        "type": "string",
+                                        "example": "ABS-001"
+                                    },
+                                    "id_pembayaran": {
+                                        "type": "string",
+                                        "example": "PMB-001"
+                                    },
+                                    "nominal": {
+                                        "type": "integer",
+                                        "example": 5000000
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-04-23"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GajiBulanan"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Menghapus data gaji bulanan",
+                "operationId": "4bcbce23ad14708f24edc1039c9af5d1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID gaji bulanan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil dihapus",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/gaji-bulanan/karyawan/{id_karyawan}": {
+            "get": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Mendapatkan gaji bulanan berdasarkan ID karyawan",
+                "operationId": "c8e5101316bf123da2242211145969e5",
+                "parameters": [
+                    {
+                        "name": "id_karyawan",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GajiBulanan"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/gaji-bulanan/periode/{tahun}/{bulan}": {
+            "get": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Mendapatkan gaji bulanan berdasarkan periode",
+                "operationId": "adbae10493f9e4dcb9b0475786df05e2",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "description": "Tahun",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 2025
+                        }
+                    },
+                    {
+                        "name": "bulan",
+                        "in": "path",
+                        "description": "Bulan (1-12)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 4
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GajiBulanan"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/gaji-bulanan/absensi/{id_absensi}": {
+            "get": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Mendapatkan gaji bulanan berdasarkan ID absensi",
+                "operationId": "4fca73e6783246e209b26f4a56f2a61f",
+                "parameters": [
+                    {
+                        "name": "id_absensi",
+                        "in": "path",
+                        "description": "ID absensi",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GajiBulanan"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/gaji-bulanan/pembayaran/{id_pembayaran}": {
+            "get": {
+                "tags": [
+                    "Gaji Bulanan"
+                ],
+                "summary": "Mendapatkan gaji bulanan berdasarkan ID pembayaran",
+                "operationId": "44429cb8fcd0b23574e1af332be9f4cf",
+                "parameters": [
+                    {
+                        "name": "id_pembayaran",
+                        "in": "path",
+                        "description": "ID pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GajiBulanan"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/karyawan": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Mendapatkan daftar semua karyawan",
+                "operationId": "335abe4762bc1cf90bceaa3ae5c2619a",
+                "responses": {
+                    "200": {
+                        "description": "Data karyawan berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan berhasil diambil."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id_karyawan": {
+                                                        "type": "string",
+                                                        "example": "K001"
+                                                    },
+                                                    "nama": {
+                                                        "type": "string",
+                                                        "example": "John Doe"
+                                                    },
+                                                    "jabatan": {
+                                                        "type": "string",
+                                                        "example": "Staff IT"
+                                                    },
+                                                    "gaji_pokok": {
+                                                        "type": "number",
+                                                        "example": 5000000
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Menambahkan karyawan baru",
+                "operationId": "725261b8db5265adb2a95b6a212d8b46",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_karyawan": {
+                                        "type": "string",
+                                        "example": "K001"
+                                    },
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "jabatan": {
+                                        "type": "string",
+                                        "example": "Staff IT"
+                                    },
+                                    "gaji_pokok": {
+                                        "type": "number",
+                                        "example": 5000000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Karyawan berhasil ditambahkan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan berhasil dibuat"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id_karyawan": {
+                                                    "type": "string",
+                                                    "example": "K001"
+                                                },
+                                                "nama": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "jabatan": {
+                                                    "type": "string",
+                                                    "example": "Staff IT"
+                                                },
+                                                "gaji_pokok": {
+                                                    "type": "number",
+                                                    "example": 5000000
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 422
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Gagal membuat data karyawan"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "The id karyawan field is required."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/karyawan/{id_karyawan}": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Mendapatkan detail karyawan berdasarkan ID",
+                "operationId": "59d5a23d058bc00608497a78f961d456",
+                "parameters": [
+                    {
+                        "name": "id_karyawan",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail karyawan berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan berhasil diambil."
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id_karyawan": {
+                                                    "type": "string",
+                                                    "example": "K001"
+                                                },
+                                                "nama": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "jabatan": {
+                                                    "type": "string",
+                                                    "example": "Staff IT"
+                                                },
+                                                "gaji_pokok": {
+                                                    "type": "number",
+                                                    "example": 5000000
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Karyawan tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan tidak ditemukan."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Memperbarui data karyawan",
+                "operationId": "47dd26bbeb5e606b02015ee5d642816a",
+                "parameters": [
+                    {
+                        "name": "id_karyawan",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nama": {
+                                        "type": "string",
+                                        "example": "John Doe Updated"
+                                    },
+                                    "jabatan": {
+                                        "type": "string",
+                                        "example": "Senior IT"
+                                    },
+                                    "gaji_pokok": {
+                                        "type": "number",
+                                        "example": 6000000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Data karyawan berhasil diperbarui",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan berhasil diperbarui."
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id_karyawan": {
+                                                    "type": "string",
+                                                    "example": "K001"
+                                                },
+                                                "nama": {
+                                                    "type": "string",
+                                                    "example": "John Doe Updated"
+                                                },
+                                                "jabatan": {
+                                                    "type": "string",
+                                                    "example": "Senior IT"
+                                                },
+                                                "gaji_pokok": {
+                                                    "type": "number",
+                                                    "example": 6000000
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Karyawan tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan tidak ditemukan"
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 422
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Gagal memperbarui data karyawan"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "The nama field must be a string."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Menghapus data karyawan",
+                "operationId": "8a838b1693efbc3d914d79af0e25e938",
+                "parameters": [
+                    {
+                        "name": "id_karyawan",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Karyawan berhasil dihapus",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan berhasil dihapus."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Karyawan tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan tidak ditemukan"
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Gagal menghapus karyawan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Gagal menghapus data karyawan"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Gagal menghapus data karyawan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/karyawan/{id}/absensi": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Mendapatkan data absensi karyawan berdasarkan ID",
+                "operationId": "704bca1ac207fc3c30c0bde74df1f01a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data absensi karyawan berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data absensi karyawan berhasil diambil."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "id_karyawan": {
+                                                        "type": "string",
+                                                        "example": "K001"
+                                                    },
+                                                    "tanggal": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2023-05-01"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "Hadir"
+                                                    },
+                                                    "keterangan": {
+                                                        "type": "string",
+                                                        "example": "Masuk tepat waktu"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Karyawan tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan tidak ditemukan."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/karyawan/{id}/gaji": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Mendapatkan data gaji karyawan berdasarkan ID",
+                "operationId": "0678921361cbd941ed2162dcc9176ddf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data gaji karyawan berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data gaji karyawan berhasil diambil."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "id_karyawan": {
+                                                        "type": "string",
+                                                        "example": "K001"
+                                                    },
+                                                    "bulan": {
+                                                        "type": "integer",
+                                                        "example": 5
+                                                    },
+                                                    "tahun": {
+                                                        "type": "integer",
+                                                        "example": 2023
+                                                    },
+                                                    "gaji_pokok": {
+                                                        "type": "number",
+                                                        "example": 5000000
+                                                    },
+                                                    "tunjangan": {
+                                                        "type": "number",
+                                                        "example": 1000000
+                                                    },
+                                                    "potongan": {
+                                                        "type": "number",
+                                                        "example": 200000
+                                                    },
+                                                    "total_gaji": {
+                                                        "type": "number",
+                                                        "example": 5800000
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Karyawan tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan tidak ditemukan."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/karyawan/{id}/pembayaran": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "summary": "Mendapatkan data riwayat pembayaran karyawan berdasarkan ID",
+                "operationId": "09cea82a73cdf0d99b0bd295302c10be",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID karyawan",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data riwayat pembayaran karyawan berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data riwayat pembayaran karyawan berhasil diambil."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "id_karyawan": {
+                                                        "type": "string",
+                                                        "example": "K001"
+                                                    },
+                                                    "tanggal_pembayaran": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2023-05-28"
+                                                    },
+                                                    "jumlah": {
+                                                        "type": "number",
+                                                        "example": 5800000
+                                                    },
+                                                    "keterangan": {
+                                                        "type": "string",
+                                                        "example": "Gaji Bulan Mei 2023"
+                                                    },
+                                                    "metode_pembayaran": {
+                                                        "type": "string",
+                                                        "example": "Transfer Bank"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Karyawan tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data karyawan tidak ditemukan."
+                                        },
+                                        "data": {
+                                            "type": "null",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/riwayat-pembayaran": {
+            "get": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Ambil semua data riwayat pembayaran",
+                "description": "Menampilkan seluruh daftar pembayaran",
+                "operationId": "getAllPembayaran",
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menampilkan data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RiwayatPembayaran"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Tambah data pembayaran baru",
+                "description": "Membuat record pembayaran baru",
+                "operationId": "createPembayaran",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id_pembayaran",
+                                    "waktu",
+                                    "metode"
+                                ],
+                                "properties": {
+                                    "id_pembayaran": {
+                                        "type": "string",
+                                        "example": "PAY-001"
+                                    },
+                                    "waktu": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-04-23 10:00:00"
+                                    },
+                                    "metode": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Transfer Bank",
+                                            "Tunai",
+                                            "E-wallet"
+                                        ],
+                                        "example": "Transfer Bank"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil membuat data baru",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RiwayatPembayaran"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "id_pembayaran": [
+                                                    "The id pembayaran field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/riwayat-pembayaran/{id}": {
+            "get": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Tampilkan detail pembayaran",
+                "description": "Menampilkan data pembayaran berdasarkan ID",
+                "operationId": "showPembayaran",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dari riwayat pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menampilkan detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RiwayatPembayaran"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Record not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Update data pembayaran",
+                "description": "Memperbarui data pembayaran berdasarkan ID",
+                "operationId": "updatePembayaran",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dari riwayat pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "waktu": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-04-23 10:00:00"
+                                    },
+                                    "metode": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Transfer Bank",
+                                            "Tunai",
+                                            "E-wallet",
+                                            "QRIS"
+                                        ],
+                                        "example": "QRIS"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil memperbarui data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RiwayatPembayaran"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "metode": [
+                                                    "The metode field must be one of: Transfer Bank, Tunai, E-wallet, QRIS."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Record not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Hapus data pembayaran",
+                "description": "Menghapus data pembayaran berdasarkan ID",
+                "operationId": "deletePembayaran",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dari riwayat pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menghapus data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/riwayat-pembayaran/{id}/gaji": {
+            "get": {
+                "tags": [
+                    "Riwayat Pembayaran"
+                ],
+                "summary": "Ambil gaji bulanan berdasarkan ID pembayaran",
+                "description": "Menampilkan data gaji bulanan yang terkait dengan riwayat pembayaran",
+                "operationId": "getGajiByPembayaran",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID dari riwayat pembayaran",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menampilkan data gaji",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GajiBulanan"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Record not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -54,10 +1950,114 @@
             }
         }
     },
+    "components": {
+        "schemas": {
+            "GajiBulanan": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "id_absensi": {
+                        "type": "string",
+                        "example": "ABS-001"
+                    },
+                    "id_pembayaran": {
+                        "type": "string",
+                        "example": "PMB-001"
+                    },
+                    "nominal": {
+                        "type": "integer",
+                        "example": 5000000
+                    },
+                    "tanggal": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-04-23"
+                    }
+                },
+                "type": "object"
+            },
+            "Absensi": {
+                "properties": {
+                    "id_absensi": {
+                        "type": "string",
+                        "example": "ABS-001"
+                    },
+                    "id_karyawan": {
+                        "type": "string",
+                        "example": "KRY-001"
+                    },
+                    "waktu": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-23 08:00:00"
+                    },
+                    "keterangan": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "Karyawan": {
+                "properties": {
+                    "id_karyawan": {
+                        "type": "string",
+                        "example": "KRY-001"
+                    },
+                    "nama": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "jabatan": {
+                        "type": "string",
+                        "example": "Staff IT"
+                    },
+                    "gaji_pokok": {
+                        "type": "number",
+                        "example": 5000000
+                    }
+                },
+                "type": "object"
+            },
+            "RiwayatPembayaran": {
+                "properties": {
+                    "id_pembayaran": {
+                        "type": "string",
+                        "example": "PMB-001"
+                    },
+                    "waktu": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-23 14:00:00"
+                    },
+                    "metode": {
+                        "type": "string",
+                        "example": "Transfer Bank"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
     "tags": [
         {
-            "name": "Category",
-            "description": "Category"
+            "name": "Absensi",
+            "description": "API endpoints untuk mengelola absensi karyawan"
+        },
+        {
+            "name": "Gaji Bulanan",
+            "description": "API endpoints untuk mengelola gaji bulanan karyawan"
+        },
+        {
+            "name": "Karyawan",
+            "description": "API Endpoints untuk manajemen data karyawan"
+        },
+        {
+            "name": "Riwayat Pembayaran",
+            "description": "API endpoints for managing riwayat pembayaran"
         }
     ]
 }

@@ -10,10 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * @OA\Info(
- *     title="API Gaji Bulanan",
- *     version="1.0.0",
- *     description="API untuk manajemen gaji bulanan karyawan"
+ * @OA\Tag(
+ *     name="Gaji Bulanan",
+ *     description="API endpoints untuk mengelola gaji bulanan karyawan"
  * )
  */
 class GajiBulananController extends Controller
@@ -21,11 +20,11 @@ class GajiBulananController extends Controller
     /**
      * @OA\Get(
      *     path="/api/gaji-bulanan",
-     *     summary="Get all gaji bulanan",
+     *     summary="Mendapatkan semua data gaji bulanan",
      *     tags={"Gaji Bulanan"},
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil",
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/GajiBulanan")
@@ -46,20 +45,25 @@ class GajiBulananController extends Controller
     /**
      * @OA\Post(
      *     path="/api/gaji-bulanan",
-     *     summary="Create new gaji bulanan",
+     *     summary="Membuat data gaji bulanan baru",
      *     tags={"Gaji Bulanan"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/GajiBulanan")
+     *         @OA\JsonContent(
+     *             @OA\Property(property="id_absensi", type="string", example="ABS-001"),
+     *             @OA\Property(property="id_pembayaran", type="string", example="PMB-001"),
+     *             @OA\Property(property="nominal", type="integer", example=5000000),
+     *             @OA\Property(property="tanggal", type="string", format="date", example="2025-04-23")
+     *         )
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Created successfully",
+     *         description="Berhasil dibuat",
      *         @OA\JsonContent(ref="#/components/schemas/GajiBulanan")
      *     ),
      *     @OA\Response(
      *         response=422,
-     *         description="Validation error"
+     *         description="Validasi gagal"
      *     ),
      *     @OA\Response(
      *         response=500,
@@ -88,23 +92,23 @@ class GajiBulananController extends Controller
     /**
      * @OA\Get(
      *     path="/api/gaji-bulanan/{id}",
-     *     summary="Get gaji bulanan by ID",
+     *     summary="Mendapatkan data gaji bulanan berdasarkan ID",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of gaji bulanan",
+     *         description="ID gaji bulanan",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil",
      *         @OA\JsonContent(ref="#/components/schemas/GajiBulanan")
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Tidak ditemukan"
      *     ),
      *     @OA\Response(
      *         response=500,
@@ -125,13 +129,13 @@ class GajiBulananController extends Controller
     /**
      * @OA\Put(
      *     path="/api/gaji-bulanan/{id}",
-     *     summary="Update gaji bulanan",
+     *     summary="Memperbarui data gaji bulanan",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of gaji bulanan",
+     *         description="ID gaji bulanan",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\RequestBody(
@@ -145,16 +149,16 @@ class GajiBulananController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Updated successfully",
+     *         description="Berhasil diperbarui",
      *         @OA\JsonContent(ref="#/components/schemas/GajiBulanan")
      *     ),
      *     @OA\Response(
      *         response=422,
-     *         description="Validation error"
+     *         description="Validasi gagal"
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Tidak ditemukan"
      *     ),
      *     @OA\Response(
      *         response=500,
@@ -189,18 +193,18 @@ class GajiBulananController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/gaji-bulanan/{id}",
-     *     summary="Delete gaji bulanan",
+     *     summary="Menghapus data gaji bulanan",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of gaji bulanan",
+     *         description="ID gaji bulanan",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Deleted successfully",
+     *         description="Berhasil dihapus",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="success", type="boolean")
@@ -208,7 +212,7 @@ class GajiBulananController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Tidak ditemukan"
      *     ),
      *     @OA\Response(
      *         response=500,
@@ -229,18 +233,18 @@ class GajiBulananController extends Controller
     /**
      * @OA\Get(
      *     path="/api/gaji-bulanan/karyawan/{id_karyawan}",
-     *     summary="Get gaji bulanan by karyawan ID",
+     *     summary="Mendapatkan gaji bulanan berdasarkan ID karyawan",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
      *         name="id_karyawan",
      *         in="path",
      *         required=true,
-     *         description="ID of karyawan",
+     *         description="ID karyawan",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil",
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/GajiBulanan")
@@ -248,18 +252,13 @@ class GajiBulananController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Tidak ditemukan"
      *     ),
      *     @OA\Response(
      *         response=500,
      *         description="Server error"
      *     )
      * )
-     * 
-     * Get gaji by karyawan id
-     * 
-     * @param string $id_karyawan
-     * @return \Illuminate\Http\JsonResponse
      */
     public function getByKaryawan($id_karyawan)
     {
@@ -276,25 +275,25 @@ class GajiBulananController extends Controller
     /**
      * @OA\Get(
      *     path="/api/gaji-bulanan/periode/{tahun}/{bulan}",
-     *     summary="Get gaji bulanan by period",
+     *     summary="Mendapatkan gaji bulanan berdasarkan periode",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
      *         name="tahun",
      *         in="path",
      *         required=true,
-     *         description="Year",
+     *         description="Tahun",
      *         @OA\Schema(type="integer", example=2025)
      *     ),
      *     @OA\Parameter(
      *         name="bulan",
      *         in="path",
      *         required=true,
-     *         description="Month (1-12)",
+     *         description="Bulan (1-12)",
      *         @OA\Schema(type="integer", example=4)
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil",
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/GajiBulanan")
@@ -305,12 +304,6 @@ class GajiBulananController extends Controller
      *         description="Server error"
      *     )
      * )
-     * 
-     * Get gaji by period (month and year)
-     * 
-     * @param int $tahun
-     * @param int $bulan
-     * @return \Illuminate\Http\JsonResponse
      */
     public function getByPeriode($tahun, $bulan)
     {
@@ -328,18 +321,18 @@ class GajiBulananController extends Controller
     /**
      * @OA\Get(
      *     path="/api/gaji-bulanan/absensi/{id_absensi}",
-     *     summary="Get gaji bulanan by absensi ID",
+     *     summary="Mendapatkan gaji bulanan berdasarkan ID absensi",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
      *         name="id_absensi",
      *         in="path",
      *         required=true,
-     *         description="ID of absensi",
+     *         description="ID absensi",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil",
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/GajiBulanan")
@@ -347,18 +340,13 @@ class GajiBulananController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Tidak ditemukan"
      *     ),
      *     @OA\Response(
      *         response=500,
      *         description="Server error"
      *     )
      * )
-     * 
-     * Get gaji by absensi id
-     * 
-     * @param string $id_absensi
-     * @return \Illuminate\Http\JsonResponse
      */
     public function getByAbsensi($id_absensi)
     {
@@ -374,18 +362,18 @@ class GajiBulananController extends Controller
     /**
      * @OA\Get(
      *     path="/api/gaji-bulanan/pembayaran/{id_pembayaran}",
-     *     summary="Get gaji bulanan by pembayaran ID",
+     *     summary="Mendapatkan gaji bulanan berdasarkan ID pembayaran",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
      *         name="id_pembayaran",
      *         in="path",
      *         required=true,
-     *         description="ID of pembayaran",
+     *         description="ID pembayaran",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Success",
+     *         description="Berhasil",
      *         @OA\JsonContent(
      *             type="array",
      *             @OA\Items(ref="#/components/schemas/GajiBulanan")
@@ -393,18 +381,13 @@ class GajiBulananController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Not found"
+     *         description="Tidak ditemukan"
      *     ),
      *     @OA\Response(
      *         response=500,
      *         description="Server error"
      *     )
      * )
-     * 
-     * Get gaji by pembayaran id
-     * 
-     * @param string $id_pembayaran
-     * @return \Illuminate\Http\JsonResponse
      */
     public function getByPembayaran($id_pembayaran)
     {
