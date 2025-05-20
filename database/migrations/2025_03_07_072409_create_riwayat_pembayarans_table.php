@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('riwayat_pembayarans', function (Blueprint $table) {
             $table->uuid('id_pembayaran')->primary();
+            $table->unsignedBigInteger('id_karyawan');
             $table->date('waktu');
             $table->string('metode');
+            $table->string('file_path')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+
+            // Add foreign key constraints
+            $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawans');
         });
     }
 
