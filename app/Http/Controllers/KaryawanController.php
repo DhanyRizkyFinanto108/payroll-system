@@ -14,6 +14,19 @@ use Illuminate\Support\Facades\DB;
  */
 class KaryawanController extends Controller
 {
+    private function generateKaryawanId()
+    {
+        $lastKaryawan = Karyawan::orderBy('id_karyawan', 'desc')->first();
+        
+        if (!$lastKaryawan) {
+            return 'KRY-001';
+        }
+
+        $lastNumber = (int) substr($lastKaryawan->id_karyawan, 4);
+        $newNumber = $lastNumber + 1;
+        return 'KRY-' . str_pad($newNumber, 3, '0', STR_PAD_LEFT);
+    }
+
     /**
      * @OA\Get(
      *     path="/karyawan",

@@ -13,6 +13,19 @@ use Illuminate\Support\Str;
  */
 class AbsensiController extends Controller
 {
+    private function generateAbsensiId()
+    {
+        $lastAbsensi = Absensi::orderBy('id_absensi', 'desc')->first();
+        
+        if (!$lastAbsensi) {
+            return 'ABS-001';
+        }
+
+        $lastNumber = (int) substr($lastAbsensi->id_absensi, 4);
+        $newNumber = $lastNumber + 1;
+        return 'ABS-' . str_pad($newNumber, 3, '0', STR_PAD_LEFT);
+    }
+
     /**
      * @OA\Get(
      *     path="/absensi",
@@ -110,10 +123,13 @@ class AbsensiController extends Controller
             ], 422);
         }
 
-        $data = $request->all();
-        $data['id_absensi'] = (string) Str::uuid();
+        $absensi = new Absensi();
+        $absensi->id_absensi = $this->generateAbsensiId();
+        $absensi->id_karyawan = $request->id_karyawan;
+        $absensi->waktu = $request->waktu;
+        $absensi->keterangan = $request->keterangan;
+        $absensi->save();
 
-        $absensi = Absensi::create($data);
         return response()->json([
             'status' => 201,
             'message' => 'Absensi created successfully',
