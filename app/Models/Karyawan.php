@@ -23,10 +23,13 @@ class Karyawan extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::deleting(function($karyawan) {
             if (method_exists($karyawan, 'absensis')) {
                 $karyawan->absensis()->delete();
+            }
+            if (method_exists($karyawan, 'riwayatPembayarans')) {
+                $karyawan->riwayatPembayarans()->delete();
             }
         });
     }
@@ -34,5 +37,10 @@ class Karyawan extends Model
     public function absensis()
     {
         return $this->hasMany(Absensi::class, 'id_karyawan', 'id_karyawan');
+    }
+
+    public function riwayatPembayarans()
+    {
+        return $this->hasMany(RiwayatPembayaran::class, 'id_karyawan', 'id_karyawan');
     }
 }

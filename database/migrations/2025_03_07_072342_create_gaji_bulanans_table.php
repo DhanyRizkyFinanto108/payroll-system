@@ -12,16 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gaji_bulanans', function (Blueprint $table) {
-            $table->id('id_gaji');
-            $table->unsignedBigInteger('id_absensi');
-            $table->unsignedBigInteger('id_pembayaran');
+            $table->uuid('id_gaji')->primary();
+            $table->uuid('id_absensi');
             $table->integer('nominal');
             $table->date('tanggal');
             $table->timestamps();
-            
+
             // Add foreign key constraints
             $table->foreign('id_absensi')->references('id_absensi')->on('absensis');
-            $table->foreign('id_pembayaran')->references('id_pembayaran')->on('riwayat_pembayarans');
         });
     }
 
