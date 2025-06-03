@@ -471,29 +471,7 @@ class RiwayatPembayaranController extends Controller
      *     )
      * )
      */
-    public function generatePDF($id) {
-        try {
-            $pembayaran = RiwayatPembayaran::with('karyawan')->findOrFail($id);
-
-            $pdf = PDF::loadView('pdf.riwayat_pembayaran', [
-                'riwayatPembayaran' => $pembayaran
-            ]);
-
-            // Generate a file name
-            $fileName = 'riwayat_pembayaran_' . $id . '.pdf';
-
-            // Save the file to storage
-            Storage::put('public/pdfs/' . $fileName, $pdf->output());
-
-            // Update the file_path in the database
-            $pembayaran->file_path = 'pdfs/' . $fileName;
-            $pembayaran->save();
-
-            return $pdf->download($fileName);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
+    
 
     /**
      * @OA\Get(
