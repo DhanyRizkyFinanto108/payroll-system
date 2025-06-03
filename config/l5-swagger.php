@@ -170,6 +170,13 @@ return [
         */
         'securityDefinitions' => [
             'securitySchemes' => [
+                'ApiKeyAuth' => [ // bebas nama skemanya
+        'type' => 'apiKey',
+        'description' => 'Masukkan API key dengan format Bearer {token}',
+        'name' => 'Authorization',
+        'in' => 'header',
+    ],
+                
                 /*
                  * Examples of Security schemes
                  */
@@ -215,7 +222,9 @@ return [
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
                 */
+                
             ],
+            
             'security' => [
                 /*
                  * Examples of Securities

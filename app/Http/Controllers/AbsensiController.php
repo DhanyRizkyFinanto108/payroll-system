@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 /**
  * @OA\Tag(
  *     name="Absensi",
- *     description="API endpoints untuk mengelola absensi karyawan"
+ *     description="Endpoints untuk mengelola absensi karyawan"
  * )
  */
 class AbsensiController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/absensi",
+     *     path="/absensi",
      *     summary="Mendapatkan semua data absensi",
      *     tags={"Absensi"},
      *     @OA\Response(
@@ -44,7 +44,7 @@ class AbsensiController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/absensi",
+     *     path="/absensi",
      *     summary="Membuat data absensi baru",
      *     tags={"Absensi"},
      *     @OA\RequestBody(
@@ -91,7 +91,7 @@ class AbsensiController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/absensi/{id_absensi}",
+     *     path="/absensi/{id_absensi}",
      *     summary="Mendapatkan data absensi berdasarkan ID",
      *     tags={"Absensi"},
      *     @OA\Parameter(
@@ -142,7 +142,7 @@ class AbsensiController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/absensi/{id_absensi}",
+     *     path="/absensi/{id_absensi}",
      *     summary="Memperbarui data absensi",
      *     tags={"Absensi"},
      *     @OA\Parameter(
@@ -212,7 +212,7 @@ class AbsensiController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/absensi/{id_absensi}",
+     *     path="/absensi/{id_absensi}",
      *     summary="Menghapus data absensi",
      *     tags={"Absensi"},
      *     @OA\Parameter(

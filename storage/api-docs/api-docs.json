@@ -19,13 +19,13 @@
         }
     ],
     "paths": {
-        "/api/absensi": {
+        "/absensi": {
             "get": {
                 "tags": [
                     "Absensi"
                 ],
                 "summary": "Mendapatkan semua data absensi",
-                "operationId": "5b19625a5f0d82fecfee3104447ac8b8",
+                "operationId": "0b6025737b6ed1ec2bd3573225bb1d08",
                 "responses": {
                     "200": {
                         "description": "Berhasil",
@@ -60,7 +60,7 @@
                     "Absensi"
                 ],
                 "summary": "Membuat data absensi baru",
-                "operationId": "2e14460020ca3a62a1fb85def420520e",
+                "operationId": "de8b1bca43458a5c859b97c8f98d71f2",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -120,13 +120,13 @@
                 }
             }
         },
-        "/api/absensi/{id_absensi}": {
+        "/absensi/{id_absensi}": {
             "get": {
                 "tags": [
                     "Absensi"
                 ],
                 "summary": "Mendapatkan data absensi berdasarkan ID",
-                "operationId": "19960c1df78be113f861bb8e78fd77cb",
+                "operationId": "1db54ba680fc4d08345e1b5bc392be12",
                 "parameters": [
                     {
                         "name": "id_absensi",
@@ -193,7 +193,7 @@
                     "Absensi"
                 ],
                 "summary": "Memperbarui data absensi",
-                "operationId": "1a6227666f2c026fdd383e16ae946879",
+                "operationId": "5baaa5647b4ab4d91e09eaa03d80c9f3",
                 "parameters": [
                     {
                         "name": "id_absensi",
@@ -288,7 +288,7 @@
                     "Absensi"
                 ],
                 "summary": "Menghapus data absensi",
-                "operationId": "e9a3aadbb774f9a1c6b8a43fa8d7e21e",
+                "operationId": "361370e575f472d04baee4a4af2a8e8e",
                 "parameters": [
                     {
                         "name": "id_absensi",
@@ -352,13 +352,13 @@
                 }
             }
         },
-        "/api/gaji-bulanan": {
+        "/gaji-bulanan": {
             "get": {
                 "tags": [
                     "Gaji Bulanan"
                 ],
                 "summary": "Mendapatkan semua data gaji bulanan",
-                "operationId": "726c16d6fa4b33a98ad99603f1a391f8",
+                "operationId": "4ea27729d12665472d1dd8ea4426c0cc",
                 "responses": {
                     "200": {
                         "description": "Berhasil",
@@ -383,7 +383,7 @@
                     "Gaji Bulanan"
                 ],
                 "summary": "Membuat data gaji bulanan baru",
-                "operationId": "15161a519634c119ab2e46456d0fe5d7",
+                "operationId": "e7b777405b25c97972c3296f825aba5c",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -433,13 +433,13 @@
                 }
             }
         },
-        "/api/gaji-bulanan/{id}": {
+        "/gaji-bulanan/{id}": {
             "get": {
                 "tags": [
                     "Gaji Bulanan"
                 ],
                 "summary": "Mendapatkan data gaji bulanan berdasarkan ID",
-                "operationId": "d13652209506f9c2c04fa1dffe9926e1",
+                "operationId": "6780d3c81467113fdd50002280a9ccc2",
                 "parameters": [
                     {
                         "name": "id",
@@ -475,7 +475,7 @@
                     "Gaji Bulanan"
                 ],
                 "summary": "Memperbarui data gaji bulanan",
-                "operationId": "e1b7c19a3f1f1848d359c88f5674462a",
+                "operationId": "0ac9ccf32804e5ed8870961202ece0f1",
                 "parameters": [
                     {
                         "name": "id",
@@ -543,7 +543,7 @@
                     "Gaji Bulanan"
                 ],
                 "summary": "Menghapus data gaji bulanan",
-                "operationId": "4bcbce23ad14708f24edc1039c9af5d1",
+                "operationId": "fb2490dc4927819eda340ca40b1f7a68",
                 "parameters": [
                     {
                         "name": "id",
@@ -580,13 +580,13 @@
                 }
             }
         },
-        "/api/gaji-bulanan/karyawan/{id_karyawan}": {
+        "/gaji-bulanan/karyawan/{id_karyawan}": {
             "get": {
                 "tags": [
                     "Gaji Bulanan"
                 ],
                 "summary": "Mendapatkan gaji bulanan berdasarkan ID karyawan",
-                "operationId": "c8e5101316bf123da2242211145969e5",
+                "operationId": "18bd2b0b39abdc55c619297703d02a37",
                 "parameters": [
                     {
                         "name": "id_karyawan",
@@ -621,13 +621,13 @@
                 }
             }
         },
-        "/api/gaji-bulanan/periode/{tahun}/{bulan}": {
+        "/gaji-bulanan/periode/{tahun}/{bulan}": {
             "get": {
                 "tags": [
                     "Gaji Bulanan"
                 ],
                 "summary": "Mendapatkan gaji bulanan berdasarkan periode",
-                "operationId": "adbae10493f9e4dcb9b0475786df05e2",
+                "operationId": "f9d4c04c560cb0ed49a4f3b3ce5dfad5",
                 "parameters": [
                     {
                         "name": "tahun",
@@ -670,13 +670,13 @@
                 }
             }
         },
-        "/api/gaji-bulanan/absensi/{id_absensi}": {
+        "/gaji-bulanan/absensi/{id_absensi}": {
             "get": {
                 "tags": [
                     "Gaji Bulanan"
                 ],
                 "summary": "Mendapatkan gaji bulanan berdasarkan ID absensi",
-                "operationId": "4fca73e6783246e209b26f4a56f2a61f",
+                "operationId": "7406151f0d89eb774e6fcf05439fbac5",
                 "parameters": [
                     {
                         "name": "id_absensi",
@@ -711,13 +711,13 @@
                 }
             }
         },
-        "/api/gaji-bulanan/pembayaran/{id_pembayaran}": {
+        "/gaji-bulanan/pembayaran/{id_pembayaran}": {
             "get": {
                 "tags": [
                     "Gaji Bulanan"
                 ],
                 "summary": "Mendapatkan gaji bulanan berdasarkan ID pembayaran",
-                "operationId": "44429cb8fcd0b23574e1af332be9f4cf",
+                "operationId": "183c022e805aa31010916ecee04e764e",
                 "parameters": [
                     {
                         "name": "id_pembayaran",
@@ -752,13 +752,13 @@
                 }
             }
         },
-        "/api/karyawan": {
+        "/karyawan": {
             "get": {
                 "tags": [
                     "Karyawan"
                 ],
                 "summary": "Mendapatkan daftar semua karyawan",
-                "operationId": "335abe4762bc1cf90bceaa3ae5c2619a",
+                "operationId": "974f1d3446b8f4b830a6194f05289a9a",
                 "responses": {
                     "200": {
                         "description": "Data karyawan berhasil diambil",
@@ -811,7 +811,7 @@
                     "Karyawan"
                 ],
                 "summary": "Menambahkan karyawan baru",
-                "operationId": "725261b8db5265adb2a95b6a212d8b46",
+                "operationId": "a9c07227b0b719b7742e937e517c95e4",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -909,13 +909,13 @@
                 }
             }
         },
-        "/api/karyawan/{id_karyawan}": {
+        "/karyawan/{id_karyawan}": {
             "get": {
                 "tags": [
                     "Karyawan"
                 ],
                 "summary": "Mendapatkan detail karyawan berdasarkan ID",
-                "operationId": "59d5a23d058bc00608497a78f961d456",
+                "operationId": "ed85fc4ffb017017459b22db6b86e898",
                 "parameters": [
                     {
                         "name": "id_karyawan",
@@ -1000,7 +1000,7 @@
                     "Karyawan"
                 ],
                 "summary": "Memperbarui data karyawan",
-                "operationId": "47dd26bbeb5e606b02015ee5d642816a",
+                "operationId": "b812599ef16b540be5ac5aef35d54b12",
                 "parameters": [
                     {
                         "name": "id_karyawan",
@@ -1133,7 +1133,7 @@
                     "Karyawan"
                 ],
                 "summary": "Menghapus data karyawan",
-                "operationId": "8a838b1693efbc3d914d79af0e25e938",
+                "operationId": "af30c67338d770f194605c43e8a5938f",
                 "parameters": [
                     {
                         "name": "id_karyawan",
@@ -1221,13 +1221,13 @@
                 }
             }
         },
-        "/api/karyawan/{id}/absensi": {
+        "/karyawan/{id}/absensi": {
             "get": {
                 "tags": [
                     "Karyawan"
                 ],
                 "summary": "Mendapatkan data absensi karyawan berdasarkan ID",
-                "operationId": "704bca1ac207fc3c30c0bde74df1f01a",
+                "operationId": "80785ef0623798b52d516bc8654ad5ba",
                 "parameters": [
                     {
                         "name": "id",
@@ -1316,13 +1316,13 @@
                 }
             }
         },
-        "/api/karyawan/{id}/gaji": {
+        "/karyawan/{id}/gaji": {
             "get": {
                 "tags": [
                     "Karyawan"
                 ],
                 "summary": "Mendapatkan data gaji karyawan berdasarkan ID",
-                "operationId": "0678921361cbd941ed2162dcc9176ddf",
+                "operationId": "9cef6c22aa6d1de2c4544fe633530f2c",
                 "parameters": [
                     {
                         "name": "id",
@@ -1422,13 +1422,13 @@
                 }
             }
         },
-        "/api/karyawan/{id}/pembayaran": {
+        "/karyawan/{id}/pembayaran": {
             "get": {
                 "tags": [
                     "Karyawan"
                 ],
                 "summary": "Mendapatkan data riwayat pembayaran karyawan berdasarkan ID",
-                "operationId": "09cea82a73cdf0d99b0bd295302c10be",
+                "operationId": "3d5d95ede50a761c3f50083b5d8cef99",
                 "parameters": [
                     {
                         "name": "id",
@@ -2040,12 +2040,20 @@
                 },
                 "type": "object"
             }
+        },
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "description": "Masukkan API key dengan format Bearer {token}",
+                "name": "Authorization",
+                "in": "header"
+            }
         }
     },
     "tags": [
         {
             "name": "Absensi",
-            "description": "API endpoints untuk mengelola absensi karyawan"
+            "description": "Endpoints untuk mengelola absensi karyawan"
         },
         {
             "name": "Gaji Bulanan",

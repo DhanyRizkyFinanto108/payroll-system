@@ -16,7 +16,7 @@ class KaryawanController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/karyawan",
+     *     path="/karyawan",
      *     summary="Mendapatkan daftar semua karyawan",
      *     tags={"Karyawan"},
      *     @OA\Response(
@@ -51,7 +51,7 @@ class KaryawanController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/karyawan",
+     *     path="/karyawan",
      *     summary="Menambahkan karyawan baru",
      *     tags={"Karyawan"},
      *     @OA\RequestBody(
@@ -124,7 +124,7 @@ class KaryawanController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/karyawan/{id_karyawan}",
+     *     path="/karyawan/{id_karyawan}",
      *     summary="Mendapatkan detail karyawan berdasarkan ID",
      *     tags={"Karyawan"},
      *     @OA\Parameter(
@@ -182,7 +182,7 @@ class KaryawanController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/karyawan/{id_karyawan}",
+     *     path="/karyawan/{id_karyawan}",
      *     summary="Memperbarui data karyawan",
      *     tags={"Karyawan"},
      *     @OA\Parameter(
@@ -284,7 +284,7 @@ class KaryawanController extends Controller
     
     /**
      * @OA\Delete(
-     *     path="/api/karyawan/{id_karyawan}",
+     *     path="/karyawan/{id_karyawan}",
      *     summary="Menghapus data karyawan",
      *     tags={"Karyawan"},
      *     @OA\Parameter(
@@ -367,7 +367,7 @@ class KaryawanController extends Controller
     
     /**
      * @OA\Get(
-     *     path="/api/karyawan/{id}/absensi",
+     *     path="/karyawan/{id}/absensi",
      *     summary="Mendapatkan data absensi karyawan berdasarkan ID",
      *     tags={"Karyawan"},
      *     @OA\Parameter(
@@ -414,7 +414,7 @@ class KaryawanController extends Controller
     
     /**
      * @OA\Get(
-     *     path="/api/karyawan/{id}/gaji",
+     *     path="/karyawan/{id}/gaji",
      *     summary="Mendapatkan data gaji karyawan berdasarkan ID",
      *     tags={"Karyawan"},
      *     @OA\Parameter(
@@ -464,7 +464,7 @@ class KaryawanController extends Controller
     
     /**
      * @OA\Get(
-     *     path="/api/karyawan/{id}/pembayaran",
+     *     path="/karyawan/{id}/pembayaran",
      *     summary="Mendapatkan data riwayat pembayaran karyawan berdasarkan ID",
      *     tags={"Karyawan"},
      *     @OA\Parameter(

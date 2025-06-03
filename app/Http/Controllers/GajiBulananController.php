@@ -19,7 +19,7 @@ class GajiBulananController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/gaji-bulanan",
+     *     path="/gaji-bulanan",
      *     summary="Mendapatkan semua data gaji bulanan",
      *     tags={"Gaji Bulanan"},
      *     @OA\Response(
@@ -44,7 +44,7 @@ class GajiBulananController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/gaji-bulanan",
+     *     path="/gaji-bulanan",
      *     summary="Membuat data gaji bulanan baru",
      *     tags={"Gaji Bulanan"},
      *     @OA\RequestBody(
@@ -91,7 +91,7 @@ class GajiBulananController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/gaji-bulanan/{id}",
+     *     path="/gaji-bulanan/{id}",
      *     summary="Mendapatkan data gaji bulanan berdasarkan ID",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
@@ -128,7 +128,7 @@ class GajiBulananController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/gaji-bulanan/{id}",
+     *     path="/gaji-bulanan/{id}",
      *     summary="Memperbarui data gaji bulanan",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
@@ -189,10 +189,10 @@ class GajiBulananController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
+    
     /**
      * @OA\Delete(
-     *     path="/api/gaji-bulanan/{id}",
+     *     path="/gaji-bulanan/{id}",
      *     summary="Menghapus data gaji bulanan",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
@@ -232,7 +232,7 @@ class GajiBulananController extends Controller
     
     /**
      * @OA\Get(
-     *     path="/api/gaji-bulanan/karyawan/{id_karyawan}",
+     *     path="/gaji-bulanan/karyawan/{id_karyawan}",
      *     summary="Mendapatkan gaji bulanan berdasarkan ID karyawan",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
@@ -274,7 +274,7 @@ class GajiBulananController extends Controller
     
     /**
      * @OA\Get(
-     *     path="/api/gaji-bulanan/periode/{tahun}/{bulan}",
+     *     path="/gaji-bulanan/periode/{tahun}/{bulan}",
      *     summary="Mendapatkan gaji bulanan berdasarkan periode",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
@@ -320,7 +320,7 @@ class GajiBulananController extends Controller
     
     /**
      * @OA\Get(
-     *     path="/api/gaji-bulanan/absensi/{id_absensi}",
+     *     path="/gaji-bulanan/absensi/{id_absensi}",
      *     summary="Mendapatkan gaji bulanan berdasarkan ID absensi",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
@@ -361,7 +361,7 @@ class GajiBulananController extends Controller
     
     /**
      * @OA\Get(
-     *     path="/api/gaji-bulanan/pembayaran/{id_pembayaran}",
+     *     path="/gaji-bulanan/pembayaran/{id_pembayaran}",
      *     summary="Mendapatkan gaji bulanan berdasarkan ID pembayaran",
      *     tags={"Gaji Bulanan"},
      *     @OA\Parameter(
