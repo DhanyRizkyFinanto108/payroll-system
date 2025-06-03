@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Storage;
 /**
  * @OA\Tag(
  *     name="Riwayat Pembayaran",
- *     description="API endpoints for managing riwayat pembayaran"
+ *     description="Endpoints untuk mengelola riwayat pembayaran"
  * )
  */
 class RiwayatPembayaranController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/riwayat-pembayaran",
+     *     path="/riwayat-pembayaran",
      *     summary="Ambil semua data riwayat pembayaran",
      *     description="Menampilkan seluruh daftar pembayaran",
      *     operationId="getAllPembayaran",
@@ -60,7 +60,7 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/riwayat-pembayaran",
+     *     path="/riwayat-pembayaran",
      *     summary="Tambah data pembayaran baru",
      *     description="Membuat record pembayaran baru",
      *     operationId="createPembayaran",
@@ -133,7 +133,7 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/riwayat-pembayaran/{id}",
+     *     path="/riwayat-pembayaran/{id}",
      *     summary="Tampilkan detail pembayaran",
      *     description="Menampilkan data pembayaran berdasarkan ID",
      *     operationId="showPembayaran",
@@ -185,7 +185,7 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/riwayat-pembayaran/{id}",
+     *     path="/riwayat-pembayaran/{id}",
      *     summary="Update data pembayaran",
      *     description="Memperbarui data pembayaran berdasarkan ID",
      *     operationId="updatePembayaran",
@@ -261,7 +261,7 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/riwayat-pembayaran/{id}",
+     *     path="/riwayat-pembayaran/{id}",
      *     summary="Soft delete data pembayaran",
      *     description="Menghapus data pembayaran berdasarkan ID (soft delete)",
      *     operationId="deletePembayaran",
@@ -316,7 +316,7 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/riwayat-pembayaran/karyawan/{id}",
+     *     path="/riwayat-pembayaran/karyawan/{id}",
      *     summary="Ambil data pembayaran berdasarkan ID karyawan",
      *     description="Menampilkan semua riwayat pembayaran untuk karyawan tertentu",
      *     operationId="getPembayaranByKaryawan",
@@ -372,65 +372,7 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/riwayat-pembayaran/{id}/gaji",
-     *     summary="Ambil gaji bulanan berdasarkan ID pembayaran",
-     *     description="Menampilkan data gaji bulanan yang terkait dengan riwayat pembayaran",
-     *     operationId="getGajiByPembayaran",
-     *     tags={"Riwayat Pembayaran"},
-     *     security={{"sanctum": {}}},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID dari riwayat pembayaran",
-     *         @OA\Schema(type="string", format="uuid")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Berhasil menampilkan data gaji",
-     *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/GajiBulanan")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Data tidak ditemukan",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Record not found")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Server error",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", example="Error message")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=401,
-     *         description="Unauthenticated",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Unauthenticated")
-     *         )
-     *     )
-     * )
-     */
-    public function getGajiBulanan($id) {
-        try {
-            $pembayaran = RiwayatPembayaran::findOrFail($id);
-            $gaji = GajiBulanan::join('absensis', 'gaji_bulanans.id_absensi', '=', 'absensis.id_absensi')
-                ->where('absensis.id_karyawan', $pembayaran->id_karyawan)
-                ->get();
-            return response()->json($gaji);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/api/riwayat-pembayaran/{id}/pdf",
+     *     path="/riwayat-pembayaran/{id}/pdf",
      *     summary="Generate PDF riwayat pembayaran",
      *     description="Generate dan download PDF untuk riwayat pembayaran",
      *     operationId="generatePembayaranPdf",
@@ -475,7 +417,7 @@ class RiwayatPembayaranController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/riwayat-pembayaran/{id}/download-pdf",
+     *     path="/riwayat-pembayaran/{id}/download-pdf",
      *     summary="Download PDF riwayat pembayaran",
      *     description="Download existing PDF file or generate new one for riwayat pembayaran",
      *     operationId="downloadExistingPembayaranPdf",
