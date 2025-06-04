@@ -173,8 +173,8 @@ class GajiBulananController extends Controller
             
             // Validasi request untuk update
             $validator = Validator::make($request->all(), [
-                'id_absensi' => 'string|exists:absensi,id_absensi',
-                'id_pembayaran' => 'string|exists:riwayat_pembayaran,id_pembayaran',
+                'id_gaji' => 'required|string|max:255|unique:gaji_bulanans,id_gaji',
+                'id_absensi' => 'string|exists:absensis,id_absensi',
                 'nominal' => 'integer|min:0',
                 'tanggal' => 'date',
             ]);

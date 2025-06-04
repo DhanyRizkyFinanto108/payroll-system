@@ -51,7 +51,7 @@ class RiwayatPembayaranController extends Controller
      */
     public function index() {
         try {
-            $pembayaran = RiwayatPembayaran::with('karyawan')->get();
+            $pembayaran = RiwayatPembayaran::with('karyawans')->get();
             return response()->json($pembayaran);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -106,7 +106,7 @@ class RiwayatPembayaranController extends Controller
     public function store(Request $request) {
         try {
             $validator = Validator::make($request->all(), [
-                'id_karyawan' => 'required|string|exists:karyawans,id_karyawan',
+                'id_karyawan' => 'required|string|exists:karyawans,id',
                 'waktu' => 'required|date',
                 'metode' => 'required|string|in:Transfer Bank,Tunai,E-wallet',
             ]);

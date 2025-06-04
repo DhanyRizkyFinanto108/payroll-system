@@ -28,7 +28,7 @@ class RiwayatPembayaran extends Model
      *
      * @var string
      */
-    protected $table = 'riwayat_pembayaran';
+    protected $table = 'riwayat_pembayarans';
 
     /**
      * The primary key for the model.
@@ -77,6 +77,6 @@ class RiwayatPembayaran extends Model
      */
     public function karyawan()
     {
-        return $this->belongsTo(Karyawan::class, 'id_karyawan', 'id_karyawan');
+        return $this->belongsTo(Karyawan::class, 'id_karyawan', 'id');
     }
 }

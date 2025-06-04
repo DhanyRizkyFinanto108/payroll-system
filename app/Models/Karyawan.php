@@ -7,13 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Karyawan extends Model
 {
     public $timestamps = false;
-    protected $table = 'karyawan';
-    protected $primaryKey = 'id_karyawan';
+    protected $table = 'karyawans';
     protected $keyType = 'string';
-    public $incrementing = false;
 
     protected $fillable = [
-        'id_karyawan',
         'nama',
         'jabatan',
         'gaji_pokok'
@@ -36,11 +33,11 @@ class Karyawan extends Model
 
     public function absensis()
     {
-        return $this->hasMany(Absensi::class, 'id_karyawan', 'id_karyawan');
+        return $this->hasMany(Absensi::class, 'id_karyawan', 'id');
     }
 
     public function riwayatPembayarans()
     {
-        return $this->hasMany(RiwayatPembayaran::class, 'id_karyawan', 'id_karyawan');
+        return $this->hasMany(RiwayatPembayaran::class, 'id_karyawan', 'id');
     }
 }

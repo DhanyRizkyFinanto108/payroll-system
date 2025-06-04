@@ -21,7 +21,7 @@ return new class extends Migration
             $table->softDeletes();
 
             // Add foreign key constraints
-            $table->foreign('id_karyawan')->references('id_karyawan')->on('karyawans');
+            $table->foreign('id_karyawan')->references('id')->on('karyawans')->onDelete('cascade');
         });
     }
 

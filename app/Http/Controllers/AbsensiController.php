@@ -109,7 +109,7 @@ class AbsensiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_karyawan' => 'required|string|exists:karyawans,id_karyawan',
+            'id_karyawan' => 'required|string|exists:karyawans,id',
             'waktu' => 'required|date',
             'keterangan' => 'required|boolean',
         ]);

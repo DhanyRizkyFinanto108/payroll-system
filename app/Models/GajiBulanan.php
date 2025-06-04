@@ -8,7 +8,7 @@ class GajiBulanan extends Model
     // Jika tabel tidak memiliki kolom created_at dan updated_at
     public $timestamps = false;
 
-    protected $table = 'gaji_bulanan';
+    protected $table = 'gaji_bulanans';
     protected $primaryKey = 'id_gaji';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -44,8 +44,8 @@ class GajiBulanan extends Model
         $input = is_array($data) ? $data : $data->all();
 
         return Validator::make($input, [
-            'id_gaji' => 'required|string|max:255|unique:gaji_bulanan,id_gaji',
-            'id_absensi' => 'required|string|exists:absensi,id_absensi',
+            'id_gaji' => 'required|string|max:255|unique:gaji_bulanans,id_gaji',
+            'id_absensi' => 'required|string|exists:absensis,id_absensi',
             'nominal' => 'required|numeric',
             'tanggal' => 'required|date',
         ]);

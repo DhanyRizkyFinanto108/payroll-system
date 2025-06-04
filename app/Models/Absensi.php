@@ -12,7 +12,7 @@ class Absensi extends Model
      *
      * @var string
      */
-    protected $table = 'absensi';
+    protected $table = 'absensis';
     
     /**
      * Primary key yang digunakan oleh tabel.

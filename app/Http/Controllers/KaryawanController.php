@@ -109,7 +109,6 @@ class KaryawanController extends Controller
         
         try {
             $validatedData = $request->validate([
-                'id_karyawan' => 'required|string|max:255|unique:karyawan,id_karyawan',
                 'nama' => 'required|string',
                 'jabatan' => 'required|string',
                 'gaji_pokok' => 'required|numeric',
